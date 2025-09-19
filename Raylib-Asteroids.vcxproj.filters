@@ -55,7 +55,7 @@
     <ClInclude Include="src\StarsManager.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Stars.h">
+    <ClInclude Include="src\Stars.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

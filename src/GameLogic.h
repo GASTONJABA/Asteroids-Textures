@@ -7,8 +7,8 @@ class GameLogic
 {
 private:
     Player player;
-    AsteroidManager asteroidManager;
-    StarsManager starsManager;
+    AsteroidManager* asteroidManager;
+    StarsManager* starsManager;
     bool GameRunning;
     void Update();
 

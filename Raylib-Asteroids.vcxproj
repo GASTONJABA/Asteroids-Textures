@@ -138,8 +138,8 @@
     <ClInclude Include="src\Bullet.h" />
     <ClInclude Include="src\GameLogic.h" />
     <ClInclude Include="src\Player.h" />
+    <ClInclude Include="src\Stars.h" />
     <ClInclude Include="src\StarsManager.h" />
-    <ClInclude Include="Stars.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

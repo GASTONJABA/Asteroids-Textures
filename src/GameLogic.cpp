@@ -4,10 +4,7 @@
 #include <time.h>
 
 GameLogic::GameLogic()
-
-
 {
-
 	GameRunning = true;
 	InitWindow(1600, 900, "Asteroids");
 	//InitAudioDevice();                                     // Initialize audio device and context
@@ -16,10 +13,10 @@ GameLogic::GameLogic()
 	srand(time(0));
 	//Texture2D spriteSheet = LoadTexture("res/Asteroids.png");
 	player.LoadTexturePlayer("res/spaceship.png");
-	starsManager.SpawnInitial(5);
-	StarsManager("res/StarsBig.png", "res/StarsMedium.png", "res/StarsSmall.png");
-	AsteroidManager("res/asteroidBig.png", "res/asteroidMedium.png", "res/asteroidSmall.png");
-	asteroidManager.SpawnInitial(5);
+	starsManager = new StarsManager("res/StarsBig.png", "res/StarsMedium.png", "res/StarsSmall.png");
+	starsManager->SpawnInitial(5);
+	asteroidManager = new AsteroidManager("res/asteroidBig.png", "res/asteroidMedium.png", "res/asteroidSmall.png");
+	asteroidManager->SpawnInitial(5);
 }
 
 GameLogic::~GameLogic()
@@ -35,11 +32,11 @@ void GameLogic::Update()
 	float deltaTime = GetFrameTime();
 
 	player.Update(deltaTime);
-	asteroidManager.Update(deltaTime);
-	starsManager.Update(deltaTime);
-	asteroidManager.CheckCollisionsWithBullets(player.GetBullets(), player.GetMaxBullets());
+	asteroidManager->Update(deltaTime);
+	starsManager->Update(deltaTime);
+	asteroidManager->CheckCollisionsWithBullets(player.GetBullets(), player.GetMaxBullets());
 
-	if (asteroidManager.CheckCollisionsWithPlayer(player.GetPosition(), player.GetRadius()))
+	if (asteroidManager->CheckCollisionsWithPlayer(player.GetPosition(), player.GetRadius()))
 	{
 		player.LoseLife();
 		if (player.GetLives() <= 0)
@@ -59,9 +56,9 @@ void GameLogic::Run()
 		ClearBackground(BLACK);
 
 		player.Draw();
-		asteroidManager.Draw();
-		starsManager.Draw();
-		DrawText(TextFormat("Lives: %d", player.GetLives()), 10, 10, 20, WHITE);
+		asteroidManager->Draw();
+		starsManager->Draw();
+		DrawText(TextFormat("Lives: %d", player.GetLives()), 10, 10, 20, RED);
 
 		if (!GameRunning)
 		{

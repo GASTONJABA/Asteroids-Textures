@@ -1,6 +1,7 @@
 #pragma once
 #include "raylib.h"
 #include "Stars.h"
+#include "Asteroid.h"
 class StarsManager
 {
 private:
