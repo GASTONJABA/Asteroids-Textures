@@ -7,8 +7,10 @@ GameLogic::GameLogic()
 {
 	GameRunning = true;
 	InitWindow(1600, 900, "Asteroids");
-	//InitAudioDevice();                                     // Initialize audio device and context
-	 //LoadMusicStream("res/mus/Asteroids.wav");
+	InitAudioDevice();                                     // Initialize audio device and context
+	// Load music ONE TIME before the game loop
+	 music = LoadMusicStream("res/Asteroids.wav");
+	PlayMusicStream(music);
 	// player.LoadTexturePlayer("res/spaceship.png");
 	srand(time(0));
 	//Texture2D spriteSheet = LoadTexture("res/Asteroids.png");
@@ -17,20 +19,24 @@ GameLogic::GameLogic()
 	starsManager->SpawnInitial(5);
 	asteroidManager = new AsteroidManager("res/asteroidBig.png", "res/asteroidMedium.png", "res/asteroidSmall.png");
 	asteroidManager->SpawnInitial(5);
+	//Music music = LoadMusicStream("res/mus/Asteroids.wav");
+
+
 }
 
 GameLogic::~GameLogic()
 {
-
+	UnloadMusicStream(music);
+	   // Close audio device (music streaming is automatically stopped)
 	CloseWindow();
 }
 
 void GameLogic::Update()
 {
 	if (!GameRunning) return;
-
+	//UpdateMusicStream(music);
 	float deltaTime = GetFrameTime();
-
+	//PlayMusicStream(music);
 	player.Update(deltaTime);
 	asteroidManager->Update(deltaTime);
 	starsManager->Update(deltaTime);
@@ -50,11 +56,15 @@ void GameLogic::Run()
 {
 	while (!WindowShouldClose())
 	{
+		UpdateMusicStream(music);
+		//Music music = LoadMusicStream("res/Asteroids.wav");
 		Update();
+		
 		BeginDrawing();
-
+		//Music music = LoadMusicStream("res/Asteroids.wav");
+		//PlayMusicStream(music);
 		ClearBackground(BLACK);
-
+		
 		player.Draw();
 		asteroidManager->Draw();
 		starsManager->Draw();

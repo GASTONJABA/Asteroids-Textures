@@ -11,9 +11,10 @@ private:
     StarsManager* starsManager;
     bool GameRunning;
     void Update();
-
+    Music music;
 public:
     GameLogic();
     ~GameLogic();
     void Run();
+
 };
